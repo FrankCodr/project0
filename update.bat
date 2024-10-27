@@ -6,8 +6,13 @@ echo.
 echo Adding all changes...
 git add .
 
+:commit_message
 echo.
-set /p commit_message="hello everyone whatsupp "
+set /p commit_message="Enter commit message (non vuoto): "
+if "%commit_message%"=="" (
+    echo Il messaggio non può essere vuoto!
+    goto commit_message
+)
 git commit -m "%commit_message%"
 
 echo.

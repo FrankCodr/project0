@@ -1,20 +1,13 @@
 "use client";
 
-
-
-
-
-
-
-
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Ensure this line is present
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const router = useRouter(); // Initialize router here
+  const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -33,10 +26,12 @@ export default function LoginPage() {
       }
 
       const data = await response.json();
+      
+      // Store the token and other necessary information in localStorage
       localStorage.setItem('token', data.token);
       localStorage.setItem('codice_agente', data.codice_agente);
-      
-      // Redirect to the dashboard page after login
+
+      // Redirect to the dashboard page after successful login
       router.replace('/dashboard');
     } catch (error) {
       console.error('Login error:', error.message);
@@ -44,14 +39,10 @@ export default function LoginPage() {
     }
   };
 
-
-
-
-
   return (
     <div style={styles.container}>
       <div style={styles.innerContainer}>
-        <img src="/logo.png" alt="Logo" style={styles.image} /> {/* Replace with your logo path */}
+        <img src="/logo.png" alt="Logo" style={styles.image} />
         <h1 style={styles.logo}>EDDYCART</h1>
 
         <form onSubmit={handleLogin} style={styles.form}>
@@ -76,7 +67,7 @@ export default function LoginPage() {
               onClick={() => setPasswordVisible(!passwordVisible)}
               style={styles.icon}
             >
-              {passwordVisible ? "👁️" : "🙈"} {/* Icon representation */}
+              {passwordVisible ? "👁️" : "🙈"}
             </span>
           </div>
           <button type="submit" style={styles.loginButton}>Accedi</button>
